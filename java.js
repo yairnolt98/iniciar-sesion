@@ -21,15 +21,12 @@ function validarFormulario(e) {
     task = [...task, objTarea];
     formulario.reset();
 
-    //agregamos al HTML
     agregarHTML();
 
-    // Guardar total de tareas en localStorage
     guardarTotalTareas();
 }
 
 function agregarHTML() {
-    //limpiar el HTML
     while (tareas.firstChild) {
         tareas.removeChild(tareas.firstChild)
     }
@@ -64,7 +61,6 @@ function agregarHTML() {
     total.textContent = `Total tareas: ${totalTareas}`;
     completadas.textContent = `Completadas: ${tareasCompletas}`;
 
-    //persistir los datos con localStorage
     localStorage.setItem("tareas", JSON.stringify(task))
 
 }
@@ -72,7 +68,6 @@ function agregarHTML() {
 function eliminarTarea(e) {
     if (e.target.classList.contains("eliminar")) {
         const tareaID = Number(e.target.getAttribute("data-id"));
-        //eliminamos con el array method filter
         const nuevasTareas = task.filter((item) => item.id !== tareaID);
         task = nuevasTareas;
         agregarHTML();
@@ -91,14 +86,12 @@ function completarTarea(e) {
                 return item
             }
         })
-
-        //editamos el arreglo
         task = nuevasTareas;
         agregarHTML();
     }
 }
 
-/* EVENTOS */
+
 (() => {
     formulario.addEventListener('submit', validarFormulario);
     tareas.addEventListener("click", eliminarTarea);
